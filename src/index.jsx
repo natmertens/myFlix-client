@@ -1,11 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { MainView } from './components/main-view/main-view';
+import { MainView } from './components/main-view/main-view.jsx';
 import './index.scss';
+import Container from 'react-bootstrap/Container';
 
 class MyFlixApplication extends React.Component {
   render() {
-    return <MainView />;
+    return (
+      <Container>
+        <MainView />
+      </Container>
+    );
   }
 }
 

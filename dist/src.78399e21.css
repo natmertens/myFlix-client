@@ -1,5 +1,27 @@
-.my-flix {
-  color: steelblue;
+h1 {
+  text-align: center;
+  margin: 30px;
+}
+
+form {
+  margin-top: 20px;
+}
+
+button {
+  margin: 5px;
+}
+.label {
+  font-weight: bold;
+}
+form {
+  margin-top: 20px;
+}
+.main-view {
+  align-items: stretch;
+}
+body {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */
