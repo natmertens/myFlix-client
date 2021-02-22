@@ -3,6 +3,7 @@ import './movie-view.scss';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 export class MovieView extends React.Component {
   constructor() {
@@ -12,7 +13,7 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, onClick } = this.props;
+    const { movie } = this.props;
 
     if (!movie) return null;
 
@@ -37,7 +38,18 @@ export class MovieView extends React.Component {
             <span className="value">{movie.Director.Name}</span>
           </Card.Text>
 
-          <Button variant="danger" onClick={() => onClick()}>Back</Button>
+          <Link to={'/'}>
+            <Button variant="danger">Back to Movies</Button>
+          </Link>
+
+          <Link to={`/directors/${movie.Director.Name}`}>
+            <Button variant="danger">Director</Button>
+          </Link>
+
+          <Link to={`/genres/${movie.Genre.Name}`}>
+            <Button variant="danger">Genre</Button>
+          </Link>
+
         </Card.Body>
       </Card>
     );
@@ -58,6 +70,5 @@ MovieView.propTypes = {
       Name: PropTypes.string.isRequired,
       Bio: PropTypes.string.isRequired
     }).isRequired
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
+  }).isRequired
 };

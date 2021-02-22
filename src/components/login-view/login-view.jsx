@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './login-view.scss';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  /*changes state of username*/
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    props.onLoggedIn(username);
+    axios.post('https://natalies-myflix.herokuapp.com/login', {
+      Username: username,
+      Password: password
+    })
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('no such user')
+      });
   };
-
-  /*changes registration state and leads to registration form*/
-  const handleRequiredRegistration = () => {
-    props.onRequiredRegistration();
-  }
 
   /*Login form*/
   return (
@@ -33,7 +39,9 @@ export function LoginView(props) {
         <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </Form.Group>
       <Button variant="danger" type="submit" onClick={handleSubmit}>Log in</Button>
-      <Button variant="danger" onClick={handleRequiredRegistration}>Register</Button>
+      <Link to={'/register'}>
+        <Button variant="danger">Register</Button>
+      </Link>
     </Form>
   );
 }
@@ -42,5 +50,4 @@ export function LoginView(props) {
 /*Definition of prop types*/
 LoginView.propTypes = {
   onLoggedIn: PropTypes.func.isRequired,
-  onRequiredRegistration: PropTypes.func.isRequired
 };
