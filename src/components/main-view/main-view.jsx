@@ -22,8 +22,7 @@ export class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
-      user: null,
-      registered: true
+      user: null
     };
   }
 
@@ -66,45 +65,7 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-  /*render() {
-    const { movies, selectedMovie, user, registered } = this.state;
 
-    if (!registered) return (
-      <Row className="main-view justify-content-md-center">
-        <Col md={6}>
-          <RegistrationView onRegistration={() => this.onRegistration()} />
-        </Col>
-      </Row>
-    );
-
-    if (!user) return (
-      <Row className="main-view justify-content-md-center">
-        <Col md={6}>
-          <LoginView onLoggedIn={authData => this.onLoggedIn(authData)} onRequiredRegistration={() => this.onRequiredRegistration()} />
-        </Col>
-      </Row>
-    );
-
-    if (!movies) return <div className="main-view" />;
-
-    return (
-      <Row className="main-view justify-content-md-center">
-        {selectedMovie
-          ? (
-            <Col md={3}>
-              <MovieView movie={selectedMovie} onClick={() => this.onButtonClick()} />
-            </Col>
-          )
-          : movies.map(movie => (
-            <Col md={3}>
-              <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
-            </Col>
-          ))
-        }
-      </Row>
-    );
-
-  }*/
 
   render() {
     const { movies, user } = this.state;
@@ -141,11 +102,11 @@ export class MainView extends React.Component {
             return <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} movies={movies} />
           }
           } />
-          <Route path="/users/:username" render={({ match }) => {
+          <Route path="/users/:username" render={() => {
             if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />;
             return <ProfileView movies={movies} />
           }} />
-          <Route path="/update/:username" render={({ match }) => {
+          <Route path="/update/:username" render={() => {
             if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />;
             return <UpdateView />
           }} />

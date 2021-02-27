@@ -17,17 +17,17 @@ export function UpdateView(props) {
     e.preventDefault();
     const token = localStorage.getItem('token');
     axios.put(`https://natalies-myflix.herokuapp.com/users/${user}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    }, {
       Username: username,
       Password: password,
       Email: email,
       Birthday: birthday
+    }, {
+      headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
         const data = response.data;
         console.log(data);
-        localStorage.setItem(data.Username);
+        localStorage.setItem('user', data.Username)
         alert('Your profile was updated');
         window.open('/', '_self');
       })

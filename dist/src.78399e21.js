@@ -37675,7 +37675,9 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var movie = this.props.movie;
       if (!movie) return null;
-      return _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Img, {
+      return _react.default.createElement(_Card.default, {
+        className: "movie"
+      }, _react.default.createElement(_Card.default.Img, {
         variant: "top",
         src: movie.ImagePath
       }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Title), _react.default.createElement(_Card.default.Text, null, _react.default.createElement("span", {
@@ -38322,8 +38324,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
-      }).then(function (response) {
-        console.log(response.data);
+      }).then(function () {
         alert("".concat(user, " was deleted"));
         localStorage.removeItem('user');
         localStorage.removeItem('token');
@@ -38334,13 +38335,14 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "removeFavoriteMovie",
-    value: function removeFavoriteMovie(movie) {
+    value: function removeFavoriteMovie(movieid) {
       var _this3 = this;
 
+      console.log(movieid);
       var token = localStorage.getItem('token');
       var user = localStorage.getItem('user');
 
-      _axios.default.delete("https://natalies-myflix.herokuapp.com/users/".concat(user, "/movies/").concat(movie._id), {
+      _axios.default.delete("https://natalies-myflix.herokuapp.com/users/".concat(user, "/movies/").concat(movieid), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -38424,8 +38426,8 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           variant: "danger"
         }, "Details")), _react.default.createElement(_Button.default, {
           variant: "danger",
-          onClick: function onClick(movie) {
-            return _this4.removeFavoriteMovie(movie);
+          onClick: function onClick() {
+            return _this4.removeFavoriteMovie(movie._id);
           }
         }, "Remove"))));
       })))));
@@ -38505,18 +38507,18 @@ function UpdateView(props) {
     var token = localStorage.getItem('token');
 
     _axios.default.put("https://natalies-myflix.herokuapp.com/users/".concat(user), {
-      headers: {
-        Authorization: "Bearer ".concat(token)
-      }
-    }, {
       Username: username,
       Password: password,
       Email: email,
       Birthday: birthday
+    }, {
+      headers: {
+        Authorization: "Bearer ".concat(token)
+      }
     }).then(function (response) {
       var data = response.data;
       console.log(data);
-      localStorage.setItem(data.Username);
+      localStorage.setItem('user', data.Username);
       alert('Your profile was updated');
       window.open('/', '_self');
     }).catch(function (err) {
@@ -52093,8 +52095,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this);
     _this.state = {
       movies: [],
-      user: null,
-      registered: true
+      user: null
     };
     return _this;
   }
@@ -52144,41 +52145,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
       this.getMovies(authData.token);
     }
-    /*render() {
-      const { movies, selectedMovie, user, registered } = this.state;
-        if (!registered) return (
-        <Row className="main-view justify-content-md-center">
-          <Col md={6}>
-            <RegistrationView onRegistration={() => this.onRegistration()} />
-          </Col>
-        </Row>
-      );
-        if (!user) return (
-        <Row className="main-view justify-content-md-center">
-          <Col md={6}>
-            <LoginView onLoggedIn={authData => this.onLoggedIn(authData)} onRequiredRegistration={() => this.onRequiredRegistration()} />
-          </Col>
-        </Row>
-      );
-        if (!movies) return <div className="main-view" />;
-        return (
-        <Row className="main-view justify-content-md-center">
-          {selectedMovie
-            ? (
-              <Col md={3}>
-                <MovieView movie={selectedMovie} onClick={() => this.onButtonClick()} />
-              </Col>
-            )
-            : movies.map(movie => (
-              <Col md={3}>
-                <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
-              </Col>
-            ))
-          }
-        </Row>
-      );
-      }*/
-
   }, {
     key: "render",
     value: function render() {
@@ -52263,8 +52229,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/users/:username",
-        render: function render(_ref4) {
-          var match = _ref4.match;
+        render: function render() {
           if (!user) return _react.default.createElement(_loginView.LoginView, {
             onLoggedIn: function onLoggedIn(data) {
               return _this3.onLoggedIn(data);
@@ -52276,8 +52241,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/update/:username",
-        render: function render(_ref5) {
-          var match = _ref5.match;
+        render: function render() {
           if (!user) return _react.default.createElement(_loginView.LoginView, {
             onLoggedIn: function onLoggedIn(data) {
               return _this3.onLoggedIn(data);
@@ -52387,7 +52351,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61585" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54746" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

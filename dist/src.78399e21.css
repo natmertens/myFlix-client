@@ -16,6 +16,12 @@ button {
 .label {
   font-weight: bold;
 }
+
+.movie {
+  width: 22rem;
+  height: auto;
+  margin: 0 auto;
+}
 form {
   margin-top: 20px;
 }

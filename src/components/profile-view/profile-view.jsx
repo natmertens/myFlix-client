@@ -57,8 +57,7 @@ export class ProfileView extends React.Component {
     axios.delete(`https://natalies-myflix.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
-      .then((response) => {
-        console.log(response.data);
+      .then(() => {
         alert(`${user} was deleted`);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
@@ -69,10 +68,11 @@ export class ProfileView extends React.Component {
       })
   }
 
-  removeFavoriteMovie(movie) {
+  removeFavoriteMovie(movieid) {
+    console.log(movieid);
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
-    axios.delete(`https://natalies-myflix.herokuapp.com/users/${user}/movies/${movie._id}`, {
+    axios.delete(`https://natalies-myflix.herokuapp.com/users/${user}/movies/${movieid}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => {
@@ -149,7 +149,7 @@ export class ProfileView extends React.Component {
                       <Link to={`/movies/${movie._id}`}>
                         <Button variant="danger">Details</Button>
                       </Link>
-                      <Button variant="danger" onClick={(movie) => this.removeFavoriteMovie(movie)}>
+                      <Button variant="danger" onClick={() => this.removeFavoriteMovie(movie._id)}>
                         Remove
                       </Button>
                     </Card.Body>
