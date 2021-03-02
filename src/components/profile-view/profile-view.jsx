@@ -58,7 +58,7 @@ export class ProfileView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(() => {
-        alert(`${user} was deleted`);
+        alert(user + ' was deleted');
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         window.open('/', '_self');
@@ -88,7 +88,7 @@ export class ProfileView extends React.Component {
   render() {
 
     const { movies } = this.props;
-    const { username, password, email, birthday, favorites } = this.state;
+    const { username, email, birthday, favorites } = this.state;
     const favoritesList = movies.filter((movie) => {
       return (favorites.indexOf(movie._id) !== -1);
     });

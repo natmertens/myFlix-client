@@ -42,8 +42,8 @@ export class GenreView extends React.Component {
           <Container>
             <Row className="justify-content-md-center">
               {genreMovies.map(movie => (
-                <Col md={3}>
-                  <MovieCard key={movie._id} movie={movie} />
+                <Col md={3} key={movie._id} >
+                  <MovieCard movie={movie} />
                 </Col>)
               )}
             </Row>
