@@ -11,7 +11,7 @@ export class MovieCard extends React.Component {
 
     /*MovieCard*/
     return (
-      <Card className="movie-card">
+      <Card className="movie-card h-100">
         <Card.Img variant="top" src={movie.ImagePath} />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
@@ -26,7 +26,6 @@ export class MovieCard extends React.Component {
 }
 
 /*Definition of prop types*/
-
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,

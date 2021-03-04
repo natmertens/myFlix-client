@@ -4,12 +4,29 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export class MovieView extends React.Component {
   constructor() {
     super();
 
     this.state = {};
+  }
+
+  /*add a movie to favorites*/
+  addFavorite(movieid) {
+    console.log(movieid);
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    axios.post(`https://natalies-myflix.herokuapp.com/users/${user}/movies/${movieid}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(() => {
+        alert(`${movie.Title} was added to your favorites`)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   render() {
@@ -39,16 +56,18 @@ export class MovieView extends React.Component {
           </Card.Text>
 
           <Link to={'/'}>
-            <Button variant="danger">Back to Movies</Button>
+            <Button className="button-movie-view" variant="danger">Back to Movies</Button>
           </Link>
 
           <Link to={`/directors/${movie.Director.Name}`}>
-            <Button variant="danger">Director</Button>
+            <Button className="button-movie-view" variant="danger">Director</Button>
           </Link>
 
           <Link to={`/genres/${movie.Genre.Name}`}>
-            <Button variant="danger">Genre</Button>
+            <Button className="button-movie-view" variant="danger">Genre</Button>
           </Link>
+
+          <Button className="button-movie-view" variant="danger" onClick={() => this.addFavorite(movie._id)}>Add to Favorites</Button>
 
         </Card.Body>
       </Card>

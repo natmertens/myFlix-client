@@ -10,20 +10,25 @@ form {
 button {
   margin: 5px;
 }
-.movie-card {
-  width: 14rem;
-}
 .label {
   font-weight: bold;
 }
 
 .movie {
-  width: 22rem;
+  width: 20rem;
   height: auto;
   margin: 0 auto;
 }
+
+.button-movie-view {
+  margin: 5px;
+}
 form {
   margin-top: 20px;
+}
+.movie-card {
+  margin-bottom: 20px;
+  width: 16rem;
 }
 body {
   font-size: 20px;
@@ -34,14 +39,20 @@ h3 {
 }
 
 .director-bio {
-  margin-bottom: 20px;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+button {
+  margin-bottom: 30px;
 }
 h3 {
   margin: 30px auto;
 }
 
 .genre-description {
-  margin-bottom: 20px;
+  max-width: 500px;
+  margin: 20px auto;
 }
 .profile-view {
   margin: 30px;
@@ -59,8 +70,25 @@ h3 {
 .favorite-movie {
   display: flex;
 }
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+button {
+  margin-top: 20px;
+}
 .main-view {
   align-items: stretch;
+}
+.visibility-filter {
+  position: relative;
+  display: inline;
+  max-width: 300px;
+}
+.row-margin-20 {
+  margin-top: 2em;
 }
 body {
   font-family: "Lato", sans-serif;

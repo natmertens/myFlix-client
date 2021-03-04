@@ -19,26 +19,23 @@ export class GenreView extends React.Component {
   render() {
     const { genre, movies } = this.props
 
+    /*create new array of movies with a specific genre*/
     const genreMovies = movies.filter(movie =>
-      movie.Genre.Name.includes(genre.Name));
+      movie.Genre.Name.includes(genre.Genre.Name));
 
     if (!genre) return null;
-    if (!movies) return null;
 
     return (
       <div className="genre-view" >
         <div>
-          <h3 className="text-danger">{genre.Name}</h3>
+          <h3 className="text-danger">{genre.Genre.Name}</h3>
         </div>
         <div className="genre-description">
-          <span >{genre.Description}</span>
+          <span >{genre.Genre.Description}</span>
         </div>
-        <Link to={'/'}>
-          <Button variant="danger">Back to Movies</Button>
-        </Link>
 
-        <div className="genre-movies">
-          <h3 className="text-danger">All {genre.Name} Genre Movies </h3>
+        <div className="genre-movies text-center">
+          <h3 className="text-danger">Other {genre.Genre.Name} Genre Movies </h3>
           <Container>
             <Row className="justify-content-md-center">
               {genreMovies.map(movie => (
@@ -48,15 +45,16 @@ export class GenreView extends React.Component {
               )}
             </Row>
           </Container>
+          <Link to={'/'}>
+            <Button variant="danger">Back to Movies</Button>
+          </Link>
         </div>
       </div>
     );
-
   }
-
 }
 
 /*Definition of prop types*/
 GenreView.propTypes = {
-  movies: PropTypes.array.isRequired,
+  movies: PropTypes.array.isRequired
 };

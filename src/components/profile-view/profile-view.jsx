@@ -24,6 +24,7 @@ export class ProfileView extends React.Component {
     };
   }
 
+  /*get complete user data*/
   getUser(token) {
     const user = localStorage.getItem('user');
     axios.get(`https://natalies-myflix.herokuapp.com/users/${user}`, {
@@ -51,6 +52,7 @@ export class ProfileView extends React.Component {
     }
   }
 
+  /*Delete user*/
   handleDelete() {
     const user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
@@ -68,6 +70,7 @@ export class ProfileView extends React.Component {
       })
   }
 
+  /*remove a favorite movie*/
   removeFavoriteMovie(movieid) {
     console.log(movieid);
     const token = localStorage.getItem('token');
@@ -93,10 +96,7 @@ export class ProfileView extends React.Component {
       return (favorites.indexOf(movie._id) !== -1);
     });
 
-
-
     if (!movies) return null;
-
 
     return (
       <div className="profile-view">
@@ -140,8 +140,8 @@ export class ProfileView extends React.Component {
               {favoritesList.map((movie) => (
 
 
-                <Col md={4}>
-                  <Card key={movie._id}>
+                <Col md={3} key={movie._id}>
+                  <Card >
                     <Card.Img variant="top" src={movie.ImagePath} />
                     <Card.Body>
                       <Card.Title>{movie.Title}</Card.Title>
@@ -165,10 +165,9 @@ export class ProfileView extends React.Component {
       </div >
     );
   }
-
 }
 
 /*Definition of prop types*/
 ProfileView.propTypes = {
-  movies: PropTypes.array.isRequired,
+  movies: PropTypes.array.isRequired
 };

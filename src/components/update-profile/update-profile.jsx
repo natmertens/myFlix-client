@@ -13,6 +13,7 @@ export function UpdateView(props) {
 
   const user = localStorage.getItem('user');
 
+  /*update user data an direct user back to movie view*/
   const handleUpdate = (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');

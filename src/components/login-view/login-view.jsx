@@ -10,7 +10,7 @@ export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-
+  /*function to be executed on login*/
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('https://natalies-myflix.herokuapp.com/login', {
@@ -49,5 +49,5 @@ export function LoginView(props) {
 
 /*Definition of prop types*/
 LoginView.propTypes = {
-  onLoggedIn: PropTypes.func.isRequired,
+  onLoggedIn: PropTypes.func.isRequired
 };
