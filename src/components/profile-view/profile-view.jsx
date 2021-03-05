@@ -36,7 +36,7 @@ export class ProfileView extends React.Component {
           username: response.data.Username,
           password: response.data.Password,
           email: response.data.Email,
-          birthday: response.data.Birthday,
+          birthday: response.data.Birthday.substring(0, 10),
           favorites: response.data.FavoriteMovies
         });
       })
@@ -125,7 +125,7 @@ export class ProfileView extends React.Component {
             <Button variant="danger">Update Profile</Button>
           </Link>
 
-          <Button variant="danger" type="submit" onClick={() => this.handleDelete()}>Delete Profile</Button>
+          <Button variant="danger" onClick={() => this.handleDelete()}>Delete Profile</Button>
 
           <Link to={'/'}>
             <Button variant="danger">Back to Movies</Button>
@@ -135,6 +135,7 @@ export class ProfileView extends React.Component {
 
         <div className="favorite-movies">
           <h3 className="text-danger">Your Favorite Movies</h3>
+
           <Container>
             <Row className="justify-content-md-center">
               {favoritesList.map((movie) => (

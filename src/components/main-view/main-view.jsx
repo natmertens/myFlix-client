@@ -22,8 +22,7 @@ import PropTypes from 'prop-types';
 export class MainView extends React.Component {
   constructor() {
     super();
-    this.state = {
-    };
+    this.state = {};
   }
 
   /*get movie data from API and return them as movie state*/
@@ -62,13 +61,12 @@ export class MainView extends React.Component {
   onLoggedOut() {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    this.props.setUser(localStorage.getItem('user'));
+    this.props.setUser(null);
     window.open('/', '_self');
   }
 
   render() {
-    let { movies } = this.props;
-    let user = this.props.setUser(localStorage.getItem('user'))
+    let { movies, user } = this.props;
 
     if (!movies) return <div className="main-view" />;
 
@@ -80,7 +78,7 @@ export class MainView extends React.Component {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
                 <Nav.Link as={Link} to={`/users/${user}`} target='_self'>Profile</Nav.Link>
-                <Nav.Link as={Link} to={'/'} target='_self' onClick={() => this.onLoggedOut}>Log out</Nav.Link>
+                <Nav.Link as={Link} to={'/'} target='_self' onClick={() => this.onLoggedOut()}>Log out</Nav.Link>
 
               </Nav>
 
@@ -122,7 +120,8 @@ export class MainView extends React.Component {
 /*return new movie prop for component*/
 let mapStateToProps = state => {
   return {
-    movies: state.movies
+    movies: state.movies,
+    user: state.user
   }
 }
 

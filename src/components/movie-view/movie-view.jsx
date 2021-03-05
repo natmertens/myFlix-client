@@ -14,11 +14,10 @@ export class MovieView extends React.Component {
   }
 
   /*add a movie to favorites*/
-  addFavorite(movieid) {
-    console.log(movieid);
+  addFavorite(movie) {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
-    axios.post(`https://natalies-myflix.herokuapp.com/users/${user}/movies/${movieid}`, {
+    axios.post(`https://natalies-myflix.herokuapp.com/users/${user}/movies/${movie._id}`, {}, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(() => {
@@ -67,7 +66,7 @@ export class MovieView extends React.Component {
             <Button className="button-movie-view" variant="danger">Genre</Button>
           </Link>
 
-          <Button className="button-movie-view" variant="danger" onClick={() => this.addFavorite(movie._id)}>Add to Favorites</Button>
+          <Button className="button-movie-view" variant="danger" onClick={() => this.addFavorite(movie)}>Add to Favorites</Button>
 
         </Card.Body>
       </Card>

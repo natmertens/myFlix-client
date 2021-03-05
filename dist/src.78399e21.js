@@ -40001,12 +40001,11 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 
   _createClass(MovieView, [{
     key: "addFavorite",
-    value: function addFavorite(movieid) {
-      console.log(movieid);
+    value: function addFavorite(movie) {
       var token = localStorage.getItem('token');
       var user = localStorage.getItem('user');
 
-      _axios.default.post("https://natalies-myflix.herokuapp.com/users/".concat(user, "/movies/").concat(movieid), {
+      _axios.default.post("https://natalies-myflix.herokuapp.com/users/".concat(user, "/movies/").concat(movie._id), {}, {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -40059,7 +40058,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "button-movie-view",
         variant: "danger",
         onClick: function onClick() {
-          return _this2.addFavorite(movie._id);
+          return _this2.addFavorite(movie);
         }
       }, "Add to Favorites")));
     }
@@ -40758,7 +40757,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           username: response.data.Username,
           password: response.data.Password,
           email: response.data.Email,
-          birthday: response.data.Birthday,
+          birthday: response.data.Birthday.substring(0, 10),
           favorites: response.data.FavoriteMovies
         });
       }).catch(function (error) {
@@ -40861,7 +40860,6 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         variant: "danger"
       }, "Update Profile")), _react.default.createElement(_Button.default, {
         variant: "danger",
-        type: "submit",
         onClick: function onClick() {
           return _this4.handleDelete();
         }
@@ -54660,7 +54658,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function onLoggedOut() {
       localStorage.removeItem('user');
       localStorage.removeItem('token');
-      this.props.setUser(localStorage.getItem('user'));
+      this.props.setUser(null);
       window.open('/', '_self');
     }
   }, {
@@ -54668,8 +54666,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var movies = this.props.movies;
-      var user = this.props.setUser(localStorage.getItem('user'));
+      var _this$props = this.props,
+          movies = _this$props.movies,
+          user = _this$props.user;
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
@@ -54693,7 +54692,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         to: '/',
         target: "_self",
         onClick: function onClick() {
-          return _this3.onLoggedOut;
+          return _this3.onLoggedOut();
         }
       }, "Log out")))), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
@@ -54796,7 +54795,8 @@ exports.MainView = MainView;
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    movies: state.movies
+    movies: state.movies,
+    user: state.user
   };
 };
 /*connect movie state and required actions with component*/
