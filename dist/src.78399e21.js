@@ -40021,6 +40021,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       var movie = this.props.movie;
+      console.log(movie);
       if (!movie) return null;
       return _react.default.createElement(_Card.default, {
         className: "movie"
@@ -40496,6 +40497,7 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           director = _this$props.director,
           movies = _this$props.movies;
+      console.log(director);
       /*create new array of movies by a specific director*/
 
       var directorMovies = movies.filter(function (movie) {
@@ -40510,11 +40512,23 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
         className: "text-danger"
       }, director.Director.Name)), _react.default.createElement("div", {
         className: "director-bio"
-      }, _react.default.createElement("span", null, director.Director.Bio))), _react.default.createElement("div", {
+      }, _react.default.createElement("span", {
+        className: "label"
+      }, "Bio: "), _react.default.createElement("span", null, director.Director.Bio)), _react.default.createElement("div", {
+        className: "director-birth"
+      }, _react.default.createElement("span", {
+        className: "label"
+      }, "Birth: "), _react.default.createElement("span", null, director.Director.Birth)), director.Director.Death ? _react.default.createElement("div", {
+        className: "director-death"
+      }, _react.default.createElement("span", {
+        className: "label"
+      }, "Death: "), _react.default.createElement("span", null, director.Director.Death)) : _react.default.createElement("div", {
+        className: "director-death"
+      })), _react.default.createElement("div", {
         className: "director-movies text-center"
       }, _react.default.createElement("h3", {
         className: "text-danger"
-      }, "Other Movies by ", director.Director.Name), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, {
+      }, "Movies by ", director.Director.Name), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, {
         className: "justify-content-md-center"
       }, directorMovies.map(function (movie) {
         return _react.default.createElement(_Col.default, {
@@ -40538,7 +40552,20 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
 
 exports.DirectorView = DirectorView;
 DirectorView.propTypes = {
-  movies: _propTypes.default.array.isRequired
+  movies: _propTypes.default.array.isRequired,
+  director: _propTypes.default.shape({
+    Title: _propTypes.default.string.isRequired,
+    Description: _propTypes.default.string.isRequired,
+    ImagePath: _propTypes.default.string.isRequired,
+    Genre: _propTypes.default.shape({
+      Name: _propTypes.default.string.isRequired,
+      Description: _propTypes.default.string.isRequired
+    }).isRequired,
+    Director: _propTypes.default.shape({
+      Name: _propTypes.default.string.isRequired,
+      Bio: _propTypes.default.string.isRequired
+    }).isRequired
+  }).isRequired
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","../movie-card/movie-card.jsx":"components/movie-card/movie-card.jsx","./director-view.scss":"components/director-view/director-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"components/genre-view/genre-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -40616,6 +40643,7 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           genre = _this$props.genre,
           movies = _this$props.movies;
+      console.log(genre);
       /*create new array of movies with a specific genre*/
 
       var genreMovies = movies.filter(function (movie) {
@@ -40632,7 +40660,7 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
         className: "genre-movies text-center"
       }, _react.default.createElement("h3", {
         className: "text-danger"
-      }, "Other ", genre.Genre.Name, " Genre Movies "), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, {
+      }, genre.Genre.Name, " Genre Movies "), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, {
         className: "justify-content-md-center"
       }, genreMovies.map(function (movie) {
         return _react.default.createElement(_Col.default, {
@@ -40656,7 +40684,20 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
 
 exports.GenreView = GenreView;
 GenreView.propTypes = {
-  movies: _propTypes.default.array.isRequired
+  movies: _propTypes.default.array.isRequired,
+  genre: _propTypes.default.shape({
+    Title: _propTypes.default.string.isRequired,
+    Description: _propTypes.default.string.isRequired,
+    ImagePath: _propTypes.default.string.isRequired,
+    Genre: _propTypes.default.shape({
+      Name: _propTypes.default.string.isRequired,
+      Description: _propTypes.default.string.isRequired
+    }).isRequired,
+    Director: _propTypes.default.shape({
+      Name: _propTypes.default.string.isRequired,
+      Bio: _propTypes.default.string.isRequired
+    }).isRequired
+  }).isRequired
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../movie-card/movie-card.jsx":"components/movie-card/movie-card.jsx","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./genre-view.scss":"components/genre-view/genre-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"components/profile-view/profile-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -40729,7 +40770,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this);
     _this.state = {
-      username: null,
+      user: null,
       password: null,
       email: null,
       birthday: null,
@@ -40825,6 +40866,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       var movies = this.props.movies;
       var _this$state = this.state,
           username = _this$state.username,
+          password = _this$state.password,
           email = _this$state.email,
           birthday = _this$state.birthday,
           favorites = _this$state.favorites;
@@ -40867,7 +40909,9 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         to: '/'
       }, _react.default.createElement(_Button.default, {
         variant: "danger"
-      }, "Back to Movies"))), _react.default.createElement("div", {
+      }, "Back to Movies"))), favorites.length === 0 ? _react.default.createElement("div", {
+        className: "favorites"
+      }) : _react.default.createElement("div", {
         className: "favorite-movies"
       }, _react.default.createElement("h3", {
         className: "text-danger"
@@ -54977,7 +55021,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54622" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65035" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

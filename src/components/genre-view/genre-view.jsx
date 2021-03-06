@@ -18,6 +18,7 @@ export class GenreView extends React.Component {
 
   render() {
     const { genre, movies } = this.props
+    console.log(genre);
 
     /*create new array of movies with a specific genre*/
     const genreMovies = movies.filter(movie =>
@@ -35,7 +36,7 @@ export class GenreView extends React.Component {
         </div>
 
         <div className="genre-movies text-center">
-          <h3 className="text-danger">Other {genre.Genre.Name} Genre Movies </h3>
+          <h3 className="text-danger">{genre.Genre.Name} Genre Movies </h3>
           <Container>
             <Row className="justify-content-md-center">
               {genreMovies.map(movie => (
@@ -56,5 +57,18 @@ export class GenreView extends React.Component {
 
 /*Definition of prop types*/
 GenreView.propTypes = {
-  movies: PropTypes.array.isRequired
+  movies: PropTypes.array.isRequired,
+  genre: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired
+    }).isRequired,
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Bio: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 };

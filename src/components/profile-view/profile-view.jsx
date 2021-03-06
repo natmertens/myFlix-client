@@ -16,7 +16,7 @@ export class ProfileView extends React.Component {
     super();
 
     this.state = {
-      username: null,
+      user: null,
       password: null,
       email: null,
       birthday: null,
@@ -91,10 +91,11 @@ export class ProfileView extends React.Component {
   render() {
 
     const { movies } = this.props;
-    const { username, email, birthday, favorites } = this.state;
+    const { username, password, email, birthday, favorites } = this.state;
     const favoritesList = movies.filter((movie) => {
       return (favorites.indexOf(movie._id) !== -1);
     });
+
 
     if (!movies) return null;
 
@@ -133,35 +134,37 @@ export class ProfileView extends React.Component {
 
         </Form>
 
-        <div className="favorite-movies">
-          <h3 className="text-danger">Your Favorite Movies</h3>
+        {favorites.length === 0
+          ? <div className="favorites" />
+          : <div className="favorite-movies">
+            <h3 className="text-danger">Your Favorite Movies</h3>
 
-          <Container>
-            <Row className="justify-content-md-center">
-              {favoritesList.map((movie) => (
+            <Container>
+              <Row className="justify-content-md-center">
+                {favoritesList.map((movie) => (
 
 
-                <Col md={3} key={movie._id}>
-                  <Card >
-                    <Card.Img variant="top" src={movie.ImagePath} />
-                    <Card.Body>
-                      <Card.Title>{movie.Title}</Card.Title>
-                      <Card.Text>{movie.Description}</Card.Text>
-                      <Link to={`/movies/${movie._id}`}>
-                        <Button variant="danger">Details</Button>
-                      </Link>
-                      <Button variant="danger" onClick={() => this.removeFavoriteMovie(movie._id)}>
-                        Remove
-                      </Button>
-                    </Card.Body>
-                  </Card>
+                  <Col md={3} key={movie._id}>
+                    <Card >
+                      <Card.Img variant="top" src={movie.ImagePath} />
+                      <Card.Body>
+                        <Card.Title>{movie.Title}</Card.Title>
+                        <Card.Text>{movie.Description}</Card.Text>
+                        <Link to={`/movies/${movie._id}`}>
+                          <Button variant="danger">Details</Button>
+                        </Link>
+                        <Button variant="danger" onClick={() => this.removeFavoriteMovie(movie._id)}>
+                          Remove
+                </Button>
+                      </Card.Body>
+                    </Card>
 
-                </Col>
+                  </Col>
 
-              ))}
-            </Row>
-          </Container>
-        </div>
+                ))}
+              </Row>
+            </Container>
+          </div>}
 
       </div >
     );
